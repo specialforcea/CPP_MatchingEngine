@@ -1,1 +1,3 @@
-orderbook/Build/**
+orderbook/build/**
+orderbook/.vscode/**
+.vscode/**
