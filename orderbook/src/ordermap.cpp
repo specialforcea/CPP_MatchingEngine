@@ -10,6 +10,8 @@ OrderMap::OrderMap(bool T){
 
 void OrderMap::insert_OrderEntry(OrderEntry o){
 
+    if (type!=o.get_orderType()) {throw std::invalid_argument("Order type does not match order map.");}
+
     float p = o.get_LimitPrice();
     long q = o.get_orderQuantity();
     long t = o.get_submittedTime();

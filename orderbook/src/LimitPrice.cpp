@@ -3,13 +3,13 @@
 LimitPrice::LimitPrice(float p, bool b)
 {
     price = p;
-    is_bid_ = b;
+    type = b;
 }
 
 
-bool  LimitPrice::is_bid() const {return is_bid_;}
+bool  LimitPrice::is_bid() const {return type==BID;}
 
-bool  LimitPrice::is_offer() const {return ~is_bid_;}
+bool  LimitPrice::is_offer() const {return type==OFFER;}
 
 // bool LimitPrice::operator < (LimitPrice  const &lp) const{
  

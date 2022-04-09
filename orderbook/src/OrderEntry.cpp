@@ -7,7 +7,7 @@ OrderEntry::OrderEntry(float p, bool b, long q, long t){
     quantity = q;
     submittedTime = t;
     price = p;
-    side = b;
+    type = b;
 }
 
 long OrderEntry::get_orderID(){
@@ -52,12 +52,12 @@ float OrderEntry::get_LimitPrice(){
 
 }
 
-void OrderEntry::set_orderSide(bool side_){
-    side = side_;
+void OrderEntry::set_orderType(bool type_){
+    type = type_;
 }
 
-bool OrderEntry::get_orderSide(){
-    return side;
+bool OrderEntry::get_orderType(){
+    return type;
 }
 
 bool OrderEntry::operator< (OrderEntry& o){

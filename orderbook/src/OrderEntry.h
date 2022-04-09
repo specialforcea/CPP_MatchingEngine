@@ -6,7 +6,7 @@ class OrderEntry{
         long quantity;
         long submittedTime;
         float price;
-        bool side;
+        bool type;
     
     public:
         OrderEntry(float p, bool b, long q, long t);
@@ -26,8 +26,8 @@ class OrderEntry{
         void set_LimitPrice(float price_);
         float get_LimitPrice();
 
-        void set_orderSide(bool side_);
-        bool get_orderSide();
+        void set_orderType(bool type_);
+        bool get_orderType();
 
         bool operator< (OrderEntry& o);
 

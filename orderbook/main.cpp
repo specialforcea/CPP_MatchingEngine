@@ -34,23 +34,28 @@ int main(){
     // }
     // std::cout << std::endl;      
 
+    bool T = BID;
+
     std::vector<OrderEntry> orderlist = {
-        OrderEntry(6,1,1,5),
-        OrderEntry(20,1,1,3),
-        OrderEntry(20,1,4,1),
-        OrderEntry(10,1,1,7),
-        OrderEntry(10,1,1,4),
-        OrderEntry(10,1,1,2),
-        OrderEntry(50,1,1,4),
-        OrderEntry(50,1,6,7),
-        OrderEntry(50,1,1,5),
+        OrderEntry(6,T,1,5),
+        OrderEntry(20,T,1,3),
+        OrderEntry(20,T,4,1),
+        OrderEntry(10,T,1,7),
+        OrderEntry(10,T,1,4),
+        OrderEntry(10,T,1,2),
+        OrderEntry(50,T,1,4),
+        OrderEntry(50,T,6,7),
+        OrderEntry(50,T,1,5),
     };
     // pbqt
 
-    OrderMap OM = OrderMap(1);
+    OrderMap OM = OrderMap(T);
 
-    for (auto x : orderlist)
-        OM.insert_OrderEntry(x);
+    for (auto x : orderlist){
+        try {OM.insert_OrderEntry(x);}
+        catch(const std::invalid_argument &e) {std::cout<<"Exception: "<<e.what()<<std::endl;}
+    }
+        
 
     // std::map<float, std::vector<OrderEntry>> ordermap = OM.get_ordermap();
     // std::map<float, std::vector<OrderEntry>>::iterator itr;

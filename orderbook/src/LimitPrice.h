@@ -1,9 +1,10 @@
-
+#define BID true
+#define OFFER false
 class LimitPrice
 {
 private:
     float price;
-    bool is_bid_;
+    bool type;
 
 public:
     LimitPrice(float p, bool b);
