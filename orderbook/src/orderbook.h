@@ -1,15 +1,20 @@
-#include<iostream>
-#include <map>
-#include <iterator>
-#include <vector>
+#include"ordermap.h"
 
 class orderbook{
     private:
         int securityID;
-        std::map<int, int> LOB;
+        OrderMap BID_OrderMap = OrderMap(BID);
+        OrderMap OFFER_OrderMap = OrderMap(OFFER);
 
     public:
-        orderbook(int sid, std::vector<int> prices, std::vector<int> volumes);
+        orderbook(int sid);
+        void set_sid(int sid);
         int get_sid();
-        std::map<int, int> get_LOB();
+        void insert_order(OrderEntry &oe);
+        void insert_orders(std::vector<OrderEntry> &vec_oe);
+        float get_BestBidPrice();
+        float get_BestOfferPrice();
+        long get_TotalBidVolume();
+        long get_TotalOfferVolume();
+
 };
