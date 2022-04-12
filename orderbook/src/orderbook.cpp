@@ -41,3 +41,37 @@ long orderbook::get_TotalBidVolume(){
 long orderbook::get_TotalOfferVolume(){
     return OFFER_OrderMap.get_TotalVolume();
 }
+
+long orderbook::remove_BIDQuantity(long q){
+    return BID_OrderMap.remove_quantity(q);
+}
+
+long orderbook::remove_OFFERQuantity(long q){
+    return OFFER_OrderMap.remove_quantity(q);
+}
+
+long orderbook::match(){
+
+    float best_bid, best_offer;
+    long executed_quantity = 0;
+    long best_bid_quantity, best_offer_quantity;
+    long quantity_toRemove;
+
+    while(true){
+        best_bid = get_BestBidPrice();
+        best_offer = get_BestOfferPrice();
+        if (best_bid<0 || best_offer<0 || best_bid<best_offer) break;
+
+        best_bid_quantity = BID_OrderMap.get_BestPriceQuantity();
+        best_offer_quantity = OFFER_OrderMap.get_BestPriceQuantity();
+
+        quantity_toRemove = std::min(best_bid_quantity, best_offer_quantity);
+
+        OFFER_OrderMap.remove_quantity(quantity_toRemove);
+        BID_OrderMap.remove_quantity(quantity_toRemove);
+        
+        executed_quantity += quantity_toRemove;
+    }
+
+    return executed_quantity;
+}

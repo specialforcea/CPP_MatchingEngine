@@ -60,6 +60,8 @@ int main(){
     
     std::cout << OB.get_BestBidPrice() <<' '<<OB.get_BestOfferPrice()<<' '<<std::endl;
     std::cout << OB.get_TotalBidVolume() <<' '<<OB.get_TotalOfferVolume()<<' '<<std::endl;
+
+    std::cout << OB.match()<<std::endl;
     // for (auto x : orderlist){
     //     try {OM.insert_OrderEntry(x);}
     //     catch(const std::invalid_argument &e) {std::cout<<"Exception: "<<e.what()<<std::endl;}

@@ -98,3 +98,31 @@ long OrderMap::remove_quantity_in_price(float r_p, long r_q){
     return r_q - q_toRemove;
 
 }
+
+long OrderMap::remove_quantity(long r_q){
+    long quantity = r_q;
+
+    while (quantity>0){
+
+        float best_price = get_BestLimitPrice();
+        if (best_price<0) break;
+        
+        quantity -= remove_quantity_in_price(best_price, quantity);
+        
+    }
+
+    return r_q - quantity;
+}
+
+long OrderMap::get_BestPriceQuantity(){
+
+    float best_price = get_BestLimitPrice();
+    long quantity = 0;
+    if (best_price<0) return 0;
+
+    for (auto orders:get_ordermap().begin()->second){
+        quantity += orders.second.get_orderQuantity();
+    }
+
+    return quantity;
+}

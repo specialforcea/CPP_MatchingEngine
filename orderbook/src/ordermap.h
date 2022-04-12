@@ -17,6 +17,8 @@ class OrderMap {
         std::map<LimitPrice, std::multimap<long, OrderEntry>> get_ordermap();
         long remove_quantity_in_price(float r_p, long r_q);
         void remove_price(float r_p);
+        long remove_quantity(long r_q);
+        long get_BestPriceQuantity();
         
 
 };

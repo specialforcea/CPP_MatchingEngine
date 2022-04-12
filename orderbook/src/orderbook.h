@@ -16,5 +16,8 @@ class orderbook{
         float get_BestOfferPrice();
         long get_TotalBidVolume();
         long get_TotalOfferVolume();
+        long remove_BIDQuantity(long q);
+        long remove_OFFERQuantity(long q);
+        long match();
 
 };
