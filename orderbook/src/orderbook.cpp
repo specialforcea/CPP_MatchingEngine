@@ -73,5 +73,5 @@ long orderbook::match(){
         executed_quantity += quantity_toRemove;
     }
 
-    return executed_quantity;
+    return executed_quantity * 2;
 }

@@ -120,7 +120,7 @@ long OrderMap::get_BestPriceQuantity(){
     long quantity = 0;
     if (best_price<0) return 0;
 
-    for (auto orders:get_ordermap().begin()->second){
+    for (auto orders:ordermap.begin()->second){
         quantity += orders.second.get_orderQuantity();
     }
 

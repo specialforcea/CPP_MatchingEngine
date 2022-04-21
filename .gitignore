@@ -1,3 +1,4 @@
 orderbook/build/**
 orderbook/.vscode/**
 .vscode/**
+test_aeron/**

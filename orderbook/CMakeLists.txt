@@ -2,26 +2,13 @@ cmake_minimum_required(VERSION 3.23.0)
 
 project(ob)
 
-add_executable(${PROJECT_NAME} main.cpp)
+# add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} ./test/time_execution.cpp)
 
 include_directories(./src)
 link_directories(./src)
 
-add_library(orderbook SHARED
-    ./src/orderbook.cpp
-)
-
-add_library(orderentry SHARED
-    ./src/OrderEntry.cpp
-)
-
-add_library(ordermap SHARED
-    ./src/ordermap.cpp
-)
-
-add_library(limitprice SHARED
-    ./src/LimitPrice.cpp
-)
+add_subdirectory(./src)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ./src)
 

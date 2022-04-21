@@ -10,6 +10,15 @@ OrderEntry::OrderEntry(float p, bool b, long q, long t){
     type = b;
 }
 
+OrderEntry::OrderEntry(){
+    orderID = 0;
+    orderStatus = 0;
+    quantity = 0;
+    submittedTime = 0;
+    price = -1.0;
+    type = false;
+}
+
 long OrderEntry::get_orderID(){
     return orderID;
 }

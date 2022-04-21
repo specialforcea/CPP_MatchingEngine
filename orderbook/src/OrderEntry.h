@@ -9,6 +9,7 @@ class OrderEntry{
         bool type;
     
     public:
+        OrderEntry();
         OrderEntry(float p, bool b, long q, long t);
 
         void set_orderID(long _ID_);
