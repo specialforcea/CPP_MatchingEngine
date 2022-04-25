@@ -25,6 +25,9 @@ bool  LimitPrice::is_offer() const {return type==OFFER;}
 float LimitPrice::get_limitprice() const {return price;}
 
 bool operator<(const LimitPrice &lp1, const LimitPrice &lp2){
-    if (lp1.is_bid() && lp2.is_bid()) return lp1.get_limitprice()>lp2.get_limitprice();
-    else return lp1.get_limitprice()<lp2.get_limitprice();
+    if (lp1.is_bid() && lp2.is_bid()) return lp1.get_limitprice() - lp2.get_limitprice() > 0.005;
+    else return lp1.get_limitprice() - lp2.get_limitprice() < -0.005;
+
+    // if (lp1.is_bid() && lp2.is_bid()) return lp1.get_limitprice() > lp2.get_limitprice();
+    // else return lp1.get_limitprice() < lp2.get_limitprice();
 }

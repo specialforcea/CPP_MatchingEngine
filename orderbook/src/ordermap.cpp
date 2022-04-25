@@ -4,6 +4,7 @@
 OrderMap::OrderMap(bool T){
     type = T;
     std::map<LimitPrice, std::multimap<long, OrderEntry>> ordermap;
+    std::map<LimitPrice, int> price_volume;
     TotalVolume = 0;
 
 }
@@ -20,9 +21,11 @@ void OrderMap::insert_OrderEntry(OrderEntry o){
 
     if (ordermap.count(limitprice)>0){
         ordermap[limitprice].insert({t, o});
+        price_volume[limitprice] += q;
     }
     else{
         ordermap[limitprice] = {{t, o}};
+        price_volume[limitprice] = q;
     }
 
     TotalVolume += q;
@@ -54,13 +57,13 @@ void OrderMap::remove_price(float r_p){
 
     LimitPrice limit_r_p = LimitPrice(r_p, type);
 
-    if (ordermap.count(limit_r_p)){
-        for(auto o : ordermap[limit_r_p]){
-            quantity += o.second.get_orderQuantity();
-        }
+    if (ordermap.count(limit_r_p) && price_volume.count(limit_r_p)){
+        
+        quantity = price_volume[limit_r_p];
         TotalVolume -= quantity;
         ordermap.erase(limit_r_p);
-    }
+        price_volume.erase(limit_r_p);
+    }    
     
 }
 
@@ -80,18 +83,23 @@ long OrderMap::remove_quantity_in_price(float r_p, long r_q){
 
             if (cur_q>q_toRemove){
                 ordermap[limit_r_p].begin()->second.set_orderQuantity(cur_q - q_toRemove);
+                price_volume[limit_r_p] -= q_toRemove;
                 q_toRemove = 0;
             }
             else{
                 q_toRemove -= cur_q;
                 ordermap[limit_r_p].erase(ordermap[limit_r_p].begin());
+                price_volume[limit_r_p] -= cur_q;
             }
         }
         else break;
         
     }
 
-    if (ordermap[limit_r_p].size()==0)  ordermap.erase(limit_r_p);
+    if (ordermap[limit_r_p].size()==0) {
+        ordermap.erase(limit_r_p);
+        price_volume.erase(limit_r_p);
+    } 
 
     TotalVolume -= (r_q - q_toRemove);
 
@@ -117,12 +125,10 @@ long OrderMap::remove_quantity(long r_q){
 long OrderMap::get_BestPriceQuantity(){
 
     float best_price = get_BestLimitPrice();
-    long quantity = 0;
+    
     if (best_price<0) return 0;
 
-    for (auto orders:ordermap.begin()->second){
-        quantity += orders.second.get_orderQuantity();
-    }
+    LimitPrice BestLimitPrice = LimitPrice(best_price, type);
 
-    return quantity;
+    return price_volume[BestLimitPrice];
 }

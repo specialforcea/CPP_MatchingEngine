@@ -7,6 +7,7 @@ class OrderMap {
     private:
         bool type;
         std::map<LimitPrice, std::multimap<long, OrderEntry>> ordermap;
+        std::map<LimitPrice, int> price_volume;
         long TotalVolume;
     
     public:
