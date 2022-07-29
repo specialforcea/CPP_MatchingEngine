@@ -1,5 +1,8 @@
 add_library(orderbook SHARED
     orderbook.cpp
+    ordermap.cpp
+    LimitPrice.cpp
+    OrderEntry.cpp
 )
 
 add_library(orderentry SHARED
@@ -8,6 +11,8 @@ add_library(orderentry SHARED
 
 add_library(ordermap SHARED
     ordermap.cpp
+    LimitPrice.cpp
+    OrderEntry.cpp
 )
 
 add_library(limitprice SHARED
