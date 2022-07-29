@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 3.23.0)
 project(ob)
 
 # add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME} ./test/time_execution.cpp)
+# add_executable(${PROJECT_NAME} ./test/time_execution.cpp)
+add_executable(${PROJECT_NAME} ./test/time_multithreading.cpp)
 
 include_directories(./src)
 link_directories(./src)
@@ -21,3 +22,8 @@ target_link_libraries(${PROJECT_NAME} orderentry)
 target_link_libraries(${PROJECT_NAME} ordermap)
 
 target_link_libraries(${PROJECT_NAME} limitprice)
+
+find_package (Threads)
+
+target_link_libraries (${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
+
